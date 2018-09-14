@@ -22,9 +22,9 @@ Port of above mentioned libary in Java by **TheMarpe** : https://github.com/them
 The protocol uses **big endian** for transmission of multibyte values
 
 ## Protocol - Message
-| Message start | Command / Response | Message end |
-| ------ | ------ | ------ |
-| 0x00 | COBS encoded command or response | 0x00 |
+| Command / Response | Message end delimiter |
+| ------ | ------ |
+| COBS encoded command or response | 0x00 |
 
 ### Command 
 | Command | Data length | Data |
