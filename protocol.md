@@ -10,10 +10,12 @@ Responds are issued by device
 
 ## COBS - Consistent overhead byte stuffing 
 Replaces all 0x00 bytes from data with different values and 2 bytes of overhead (data length < 254 )
+
 This enables the message start and end delimiters. It also provides for message resynchronization in case of faulty messages
 
 ### COBS - Implementation / library
 COBS implementation in C by **Craig McQueen** : https://github.com/cmcqueen/cobs-c
+
 Port of above mentioned libary in Java by **TheMarpe** : https://github.com/themarpe/cobs-java
 
 ## Protocol - Endianess
