@@ -3,15 +3,23 @@ Open Thermal Camera Protocol between Android application and STM32F042F6 hardwar
 
 # Version - 0.1
 
-## Protocol structure
+## Description
 Message based protocol featuring commands and responses. Encoded with COBS protocol. 
 Commands are issued by host
-Respondes are issued by device
+Responds are issued by device
 
-## Endianess
-The protocol uses big endian for transmission of multibyte values
+## COBS - Consistent overhead byte stuffing 
+Replaces all 0x00 bytes from data with different values and 2 bytes of overhead (data length < 254 )
+This enables the message start and end delimiters. It also provides for message resynchronization in case of faulty messages
 
-### Message
+### COBS - Implementation / library
+COBS implementation in C by **Craig McQueen** : https://github.com/cmcqueen/cobs-c
+Port of above mentioned libary in Java by **TheMarpe** : https://github.com/themarpe/cobs-java
+
+## Protocol - Endianess
+The protocol uses **big endian** for transmission of multibyte values
+
+## Protocol - Message
 | Message start | Command / Response | Message end |
 | ------ | ------ | ------ |
 | 0x00 | COBS encoded command or response | 0x00 |
@@ -55,7 +63,7 @@ The protocol uses big endian for transmission of multibyte values
 | 0x08 | 1 | 0 ok, -1 nack | uint8_t - mode (see modes) | GetCurMode | Request the current mode of subframe storing |
 | 0x09 | 1 | 0 ok | uint8_t - auto (see auto frame sending) | SetAutoFrameDataSending | Respondes with previous auto farme sending value | 
 
-## Additional information
+## Protocol - Additional information
 
 ### Refresh rates
 | Value | Rate |
