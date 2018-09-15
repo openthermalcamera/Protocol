@@ -47,23 +47,23 @@ The protocol uses **big endian** for transmission of multibyte values
 
 
 ### Response
-| Response | Data length | Data code | Data |
+| Response | Data code | Data length | Data |
 | ------ | ------ | ----- | ------ |
-| 1 Byte (unsigned) | 2 Bytes (unsigned) | 1 Byte (signed) | {dataLength} bytes |
+| 1 Byte (unsigned) | 1 Byte (signed) | 2 Bytes (unsigned) | {dataLength} bytes |
 
 #### List of responses
-| Response | Data length | Data code | Data | Name | Description |
+| Response | Data code | Data length | Data | Name | Description |
 | ------ | ------ | ------ | ----- | ----- | ----- |
-| 0x00 | 1 | 0x00 | int8_t - ping command value * 2 | Ping | Responds to ping and multiply the received value by 2 |
-| 0x01 | 832*2 | 0 ok, -1 nack | uint16_t[832] | DumpEE | EEPROM dump of sensor | 
-| 0x02 | 834*2 | 0 ok, -1 nack, -8 I2C frequency too low | uint16_t[834] | GetFrameData | Responds with frame data |
-| 0x03 | 0 | 0 ok, -1 nack, -2 written value not same | / | SetResolution | Respondes with status |
-| 0x04 | 1 | 0 ok, -1 nack | uint8_t - resolution (see resolutions) | GetCurResolution | Responds with current resolution at which sensor samples the image |
-| 0x05 | 0 | 0 ok, -1 nack, -2 written value not same | / | SetRefreshRate | Respondes with status |
-| 0x06 | 1 | 0 ok, -1 nack | uint8_t - refresh rate (see refresh rates) | GetRefreshRate | Responds with current refresh rate at which sensor samples the image |
-| 0x07 | 0 | 0 ok, -1 nack, -2 written value not same | / | SetMode | Sends the desired mode of subframe storing |
-| 0x08 | 1 | 0 ok, -1 nack | uint8_t - mode (see modes) | GetCurMode | Request the current mode of subframe storing |
-| 0x09 | 1 | 0 ok | uint8_t - auto (see auto frame sending) | SetAutoFrameDataSending | Respondes with previous auto farme sending value | 
+| 0x00 | 0 ok | 1 | int8_t - ping command value * 2 | Ping | Responds to ping and multiply the received value by 2 |
+| 0x01 | 0 ok, -1 nack | 832*2 | uint16_t[832] | DumpEE | EEPROM dump of sensor | 
+| 0x02 | 0 ok, -1 nack, -8 I2C frequency too low | 834*2 | uint16_t[834] | GetFrameData | Responds with frame data |
+| 0x03 | 0 ok, -1 nack, -2 written value not same | 0 | / | SetResolution | Respondes with status |
+| 0x04 | 0 ok, -1 nack | 1 | uint8_t - resolution (see resolutions) | GetCurResolution | Responds with current resolution at which sensor samples the image |
+| 0x05 | 0 ok, -1 nack, -2 written value not same | 0 | / | SetRefreshRate | Respondes with status |
+| 0x06 | 0 ok, -1 nack | 1 | uint8_t - refresh rate (see refresh rates) | GetRefreshRate | Responds with current refresh rate at which sensor samples the image |
+| 0x07 | 0 ok, -1 nack, -2 written value not same | 0 | / | SetMode | Sends the desired mode of subframe storing |
+| 0x08 | 0 ok, -1 nack | 1 | uint8_t - mode (see modes) | GetCurMode | Request the current mode of subframe storing |
+| 0x09 | 0 ok | 1 | uint8_t - auto (see auto frame sending) | SetAutoFrameDataSending | Respondes with previous auto farme sending value | 
 
 ## Protocol - Additional information
 
