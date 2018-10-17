@@ -11,7 +11,7 @@ Responds are issued by device
 ## COBS - Consistent overhead byte stuffing 
 Replaces all 0x00 bytes from data with different values and 2 bytes of overhead (data length < 254 )
 
-This enables the message start and end delimiters. It also provides for message resynchronization in case of faulty messages
+This enables the message end delimiters. It also provides for message resynchronization in case of faulty messages
 
 ### COBS - Implementation / library
 COBS implementation in C by **Craig McQueen** : https://github.com/cmcqueen/cobs-c
@@ -94,3 +94,9 @@ The protocol uses **big endian** for transmission of multibyte values
 | ----- | ----- |
 | 0x00 | interleaved |
 | 0x01 | chess pattern |
+
+### Auto frame sending
+| Value | function |
+| ----- | ----- |
+| 0x00 | Disabled |
+| 0x01 | Enabled |
