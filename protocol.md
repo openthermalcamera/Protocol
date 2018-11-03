@@ -1,7 +1,7 @@
 ﻿# Open Thermal Camera Protocol
 Open Thermal Camera Protocol between Android application and STM32F042F6 hardware
 
-# Version - 0.1
+# Version - 0.1.1
 
 ## Description
 Message based protocol featuring commands and responses. Encoded with COBS protocol. 
@@ -43,7 +43,8 @@ The protocol uses **big endian** for transmission of multibyte values
 | 0x06 | 0 | / | GetRefreshRate | Request the current refresh rate at which sensor samples the image |
 | 0x07 | 1 | uint8_t - mode (see modes) | SetMode | Sends the desired mode of subframe storing |
 | 0x08 | 0 | / | GetCurMode | Request the current mode of subframe storing |
-| 0x09 | 1 | uint8_t - auto (see auto frame sending) | SetAutoFrameDataSending | Starts or stops the automated frame data sending | 
+| 0x09 | 1 | uint8_t - auto (see auto frame sending) | SetAutoFrameDataSending | Starts or stops the automated frame data sending |
+| 0x0A | 0 | / | GetFirmwareVersion | Retrieves firmware version of device to check for updates |
 
 
 ### Response
@@ -63,7 +64,8 @@ The protocol uses **big endian** for transmission of multibyte values
 | 0x06 | 0 ok, -1 nack | 1 | uint8_t - refresh rate (see refresh rates) | GetRefreshRate | Responds with current refresh rate at which sensor samples the image |
 | 0x07 | 0 ok, -1 nack, -2 written value not same | 0 | / | SetMode | Sends the desired mode of subframe storing |
 | 0x08 | 0 ok, -1 nack | 1 | uint8_t - mode (see modes) | GetCurMode | Request the current mode of subframe storing |
-| 0x09 | 0 ok | 1 | uint8_t - auto (see auto frame sending) | SetAutoFrameDataSending | Respondes with previous auto farme sending value | 
+| 0x09 | 0 ok | 1 | uint8_t - auto (see auto frame sending) | SetAutoFrameDataSending | Respondes with previous auto farme sending value |
+| 0x0A | 0 ok | 12 | struct FirmwareVersion (see FirmwareVersion structure) | GetFirmwareVersion | Respondes with firmware version of device | 
 
 ## Protocol - Additional information
 
@@ -96,7 +98,14 @@ The protocol uses **big endian** for transmission of multibyte values
 | 0x01 | chess pattern |
 
 ### Auto frame sending
-| Value | function |
+| Value | Function |
 | ----- | ----- |
 | 0x00 | Disabled |
 | 0x01 | Enabled |
+
+### FirmwareVersion structure
+| Name | Data type | Offset | Description |
+| ----- | ----- | ----- | ----- |
+| Major | int32_t | 0 | **1**.0.5 |
+| Minor | int32_t | 4 | 1.**0**.5 |
+| Revision | int32_t | 8 | 1.0.**5** |
